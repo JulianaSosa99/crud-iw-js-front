@@ -1,9 +1,9 @@
 Este es el frontend de la aplicación Team Manager, desarrollado en Angular. Permite gestionar usuarios con autenticación JWT, incluyendo creación, edición, eliminación y login seguro.
 
-🚀** Tecnologías utilizadas**
+🚀 Tecnologías utilizadas
 Angular
 
-**TypeScript**
+TypeScript
 
 HTML / CSS (diseño personalizado sin librerías externas)
 
@@ -41,20 +41,19 @@ Al iniciar sesión con admin@gmail.com (credenciales válidas del backend), se a
 Las peticiones al backend incluyen el token en los headers para autenticación.
 
 ✅ Funcionalidades
- Login seguro con JWT
+Login seguro con JWT
 
--  Lista de usuarios (solo si estás logueado)
+Lista de usuarios (solo si estás logueado)
 
--  Crear usuario
+Crear usuario
 
--  Editar usuario
+Editar usuario
 
--  Eliminar usuario (con confirmación)
+Eliminar usuario (con confirmación)
 
--  Control visual de errores y alertas
+Control visual de errores y alertas
 
 📌 Notas
 No usa librerías externas como Bootstrap o SweetAlert.
 
 Puedes cambiar la URL del backend en auth.service.ts y usuario.service.ts según tu entorno.
-
