@@ -1,27 +1,60 @@
-# TeamManagerFront
+Este es el frontend de la aplicación Team Manager, desarrollado en Angular. Permite gestionar usuarios con autenticación JWT, incluyendo creación, edición, eliminación y login seguro.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+🚀** Tecnologías utilizadas**
+Angular
 
-## Development server
+**TypeScript**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+HTML / CSS (diseño personalizado sin librerías externas)
 
-## Code scaffolding
+JWT (consumo desde backend .NET)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Angular Router
 
-## Build
+HttpClient
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+📁 Estructura principal
+src/
+├── app/
+│ ├── modules/usuarios/
+│ │ ├── pages/
+│ │ │ ├── list/ → Lista de usuarios
+│ │ │ ├── form/ → Formulario crear/editar
+│ │ │ ├── login/ → Página de login
+│ ├── services/
+│ ├── auth.service.ts
+│ ├── usuario.service.ts
 
-## Running unit tests
+📦 Instalación y ejecución
+Clonar el repositorio: git clone https://github.com/usuario/team-manager-front.git
+cd team-manager-front
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Instalar dependencias: npm install
 
-## Running end-to-end tests
+Levantar el servidor Angular: ng serve
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Abrir en el navegador: http://localhost:4200
 
-## Further help
+🔐 Autenticación
+Al iniciar sesión con admin@gmail.com (credenciales válidas del backend), se almacena un JWT en localStorage.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Las peticiones al backend incluyen el token en los headers para autenticación.
+
+✅ Funcionalidades
+ Login seguro con JWT
+
+-  Lista de usuarios (solo si estás logueado)
+
+-  Crear usuario
+
+-  Editar usuario
+
+-  Eliminar usuario (con confirmación)
+
+-  Control visual de errores y alertas
+
+📌 Notas
+No usa librerías externas como Bootstrap o SweetAlert.
+
+Puedes cambiar la URL del backend en auth.service.ts y usuario.service.ts según tu entorno.
+
