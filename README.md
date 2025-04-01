@@ -15,17 +15,21 @@ Angular Router
 
 HttpClient
 
-📁 Estructura principal
+## 📁 Estructura principal
+
+```plaintext
 src/
 ├── app/
-│ ├── modules/usuarios/
-│ │ ├── pages/
-│ │ │ ├── list/ → Lista de usuarios
-│ │ │ ├── form/ → Formulario crear/editar
-│ │ │ ├── login/ → Página de login
-│ ├── services/
-│ ├── auth.service.ts
-│ ├── usuario.service.ts
+│   ├── modules/usuarios/
+│   │   ├── pages/
+│   │   │   ├── list/       → Lista de usuarios
+│   │   │   ├── form/       → Formulario crear/editar
+│   │   │   ├── login/      → Página de login
+│   ├── services/
+│   │   ├── auth.service.ts
+│   │   ├── usuario.service.ts
+```
+
 
 📦 Instalación y ejecución
 Clonar el repositorio: git clone https://github.com/usuario/team-manager-front.git
@@ -36,6 +40,8 @@ Instalar dependencias: npm install
 Levantar el servidor Angular: ng serve
 
 Abrir en el navegador: http://localhost:4200
+
+Abrir Backend: https://github.com/JulianaSosa99/crud-iw-sjk.git
 
 🔐 Autenticación
 Al iniciar sesión con admin@gmail.com (credenciales válidas del backend), se almacena un JWT en localStorage.
