@@ -43,4 +43,14 @@ export class AuthService {
         const payload = JSON.parse(atob(token.split('.')[1]));
         return parseInt(payload["id"]);
     }
+    canActivate(): boolean {
+        const token = localStorage.getItem('jwtToken');
+        if (token) {
+          return true;
+        } else {
+          // Si no hay token, redirige a login con mensaje
+          this.router.navigate(['/login'], { queryParams: { sessionExpired: true } });
+          return false;
+        }
+      }
 }

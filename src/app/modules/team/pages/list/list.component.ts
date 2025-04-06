@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService, Usuario } from '../../../../services/usuario.service';
+import { SessionService} from '../../../../services/session.service';
+
 import { Router } from '@angular/router';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-list-usuarios',
@@ -12,11 +15,18 @@ export class ListComponent implements OnInit {
   error = '';
   isLoading = true;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {}
+  constructor(private usuarioService: UsuarioService, private router: Router,    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/usuarios/login'], { queryParams: { sessionExpired: true } });
+      return;
+    }
+  
     this.cargarUsuarios();
   }
+  
 
   cargarUsuarios(): void {
     this.usuarioService.getUsuarios().subscribe({
@@ -66,4 +76,5 @@ export class ListComponent implements OnInit {
   crear(): void {
     this.router.navigate([`/usuarios/crear`]);
   }
+  
 }

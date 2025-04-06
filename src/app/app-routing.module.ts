@@ -5,6 +5,7 @@ import { LoginComponent } from './modules/team/pages/login/login/login.component
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'usuarios', redirectTo: 'usuarios', pathMatch: 'full' },
   { path: 'login', component: LoginComponent }, 
   {
     path: 'usuarios',

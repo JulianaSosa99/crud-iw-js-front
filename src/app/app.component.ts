@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from './services/auth.service'
+
 
 @Component({
   selector: 'app-root',
@@ -7,13 +10,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router,private route: ActivatedRoute,private authService: AuthService) {}
+  sessionExpired = false;
 
   get mostrarNavbar(): boolean {
-    return this.router.url !== '/login';
+    return !this.router.url.startsWith('/login'); // 👈 esto reemplaza tu condición anterior
   }
 
   logout(): void {
+    localStorage.removeItem('jwtToken');
     this.router.navigate(['/login']);
   }
+ 
 }
