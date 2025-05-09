@@ -1,0 +1,110 @@
+.usuarios-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #2d2d2d;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+}
+
+.btn-crear {
+    background-color: #1f8b4c;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn-crear:hover {
+    background-color: #186d3d;
+}
+
+.usuarios-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.usuarios-table th,
+.usuarios-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+}
+
+.usuarios-table th {
+    background-color: #9181F4;
+    color: #fff;
+}
+
+.usuarios-table tr:hover {
+    background-color: #f7f7f7;
+}
+
+.btn-editar,
+.btn-eliminar {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-editar {
+    background-color: #5C46EE;
+    margin-right: 8px;
+}
+
+.btn-editar:hover {
+    background-color: #1b4f72;
+}
+
+.btn-eliminar {
+    background-color: #e74c3c;
+}
+
+.btn-eliminar:hover {
+    background-color: #c0392b;
+}
+
+.admin {
+    color: #5C46EE;
+    font-weight: bold;
+}
+
+.usuario {
+    color: #9181F4;
+    font-weight: 600;
+}
+
+.loader,
+.no-results {
+    text-align: center;
+    font-style: italic;
+    margin-top: 20px;
+}
+
+.error {
+    color: #e74c3c;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}

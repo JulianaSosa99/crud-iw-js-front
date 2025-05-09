@@ -1,0 +1,33 @@
+ <section class="form-container">
+  <h2>Añadir Objetivo</h2>
+  <form (ngSubmit)="guardar()">
+    <label for="titulo">Nombre Objetivo</label>
+    <input id="titulo" type="text" [(ngModel)]="titulo" name="titulo" placeholder="Nombre Objetivo" required />
+
+    <label for="tema">Tema</label>
+    <select id="tema" [(ngModel)]="temaID" name="tema" required>
+      <option [value]="null" disabled selected>Tema</option>
+      <option *ngFor="let tema of temas" [value]="tema.temaID">
+        {{ tema.nombre }}
+      </option>
+    </select>
+
+    <label for="descripcion">Descripción</label>
+    <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" placeholder="Añade la descripción"></textarea>
+
+    <label>Tareas</label>
+    <ul class="hito-list">
+      <li *ngFor="let hito of hitos">
+        <input type="checkbox" checked disabled />
+        {{ hito }}
+      </li>
+    </ul>
+
+    <div class="hito-input">
+      <input type="text" [(ngModel)]="nuevoHito" name="nuevoHito" placeholder="Nueva tarea" />
+      <button type="button" (click)="agregarHito()">Agregar +</button>
+    </div>
+
+    <button type="submit" class="btn-guardar">Guardar</button>
+  </form>
+</section>

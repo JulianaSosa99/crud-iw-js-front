@@ -1,0 +1,22 @@
+
+<header *ngIf="mostrarNavbar" class="custom-navbar">
+  <div class="nav-brand">
+    <a routerLink="usuarios">User Managment</a>
+  </div>
+  <div class="nav-actions">
+    <a routerLink="/usuarios/crear" class="nav-button">+ Crear Usuario</a>
+    <button class="nav-button logout-button" (click)="logout()">
+      <span class="material-icons logout-icon">logout</span>
+      <span class="logout-text">Cerrar Sesión</span>
+    </button>
+    
+  <button *ngIf="isAdmin()" [routerLink]="['/usuarios/temas/crear']" class="btn-tema">
+    + Añadir Tema
+  </button>
+    
+  </div>
+</header>
+
+<main class="main-container">
+  <router-outlet></router-outlet>
+</main>

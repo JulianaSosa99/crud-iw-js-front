@@ -1,0 +1,45 @@
+ 
+<!-- Aquí va tu formulario de login -->
+
+<div class="usuarios-container">
+  <h2>Gestión de Usuarios</h2>
+
+<!--   <div class="top-bar">
+    <button class="btn-crear" (click)="crear()">+ Crear Usuario</button>
+  </div> -->
+
+  <div *ngIf="isLoading" class="loader">Cargando usuarios...</div>
+  <!-- <div *ngIf="error" class="error">{{ error }}</div> -->
+
+  <table *ngIf="!isLoading && usuarios.length > 0" class="usuarios-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.id }}</td>
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>
+          <span [class.admin]="usuario.rol === 'Admin'" [class.usuario]="usuario.rol === 'Usuario'">
+            {{ usuario.rol }}
+          </span>
+        </td>
+        <td>
+          <button class="btn-editar" (click)="editar(usuario.id)">Editar</button>
+          <button class="btn-eliminar" (click)="eliminar(usuario.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!isLoading && usuarios.length === 0" class="no-results">
+    No hay usuarios registrados.
+  </div>
+</div>

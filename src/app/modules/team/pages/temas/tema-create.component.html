@@ -1,0 +1,15 @@
+<section class="tema-form-container">
+  <h2>Nuevo Tema</h2>
+
+  <form (ngSubmit)="guardar()">
+    <label for="nombre">Nombre</label>
+    <input id="nombre" [(ngModel)]="nombre" name="nombre" required />
+
+    <label for="descripcion">Descripción</label>
+    <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion"></textarea>
+
+    <button type="submit" class="btn-guardar">Guardar</button>
+
+    <p class="mensaje" *ngIf="mensaje">{{ mensaje }}</p>
+  </form>
+</section>

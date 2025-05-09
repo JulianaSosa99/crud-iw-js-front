@@ -1,0 +1,10 @@
+<section class="objetivos-container">
+  <h2>Mis Objetivos</h2>
+  <ul class="objetivo-lista">
+    <li *ngFor="let obj of objetivos">
+      <strong>{{ obj.titulo }}</strong><br />
+      <small>{{ obj.descripcion }}</small>
+    </li>
+  </ul>
+  <button (click)="irAFormulario()" class="btn-nuevo">+ Añadir Objetivo</button>
+</section>
