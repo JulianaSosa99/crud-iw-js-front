@@ -1,6 +1,18 @@
-# **TEAM MANAGER - FRONTEND**
+**TEAM MANAGER - FRONTEND**
+
+
 
 Este es el frontend de la aplicación Team Manager, desarrollado en Angular. Permite gestionar usuarios con autenticación JWT, incluyendo creación, edición, eliminación y login seguro.
+
+**DELPLOY: https://crud-iw-js-front.onrender.com/**
+
+**PROBAR USUARIO: usuariol@gmail.com/ testing01**
+
+**Reto:**
+Reporte del backend: 
+
+![image](https://github.com/user-attachments/assets/703a5e46-7444-4b4f-bde7-f1bc3234d10d)# 
+
 
 🚀 Tecnologías utilizadas
 Angular
