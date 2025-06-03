@@ -2,9 +2,26 @@
   <h2>Mis Objetivos</h2>
   <ul class="objetivo-lista">
     <li *ngFor="let obj of objetivos">
-      <strong>{{ obj.titulo }}</strong><br />
-      <small>{{ obj.descripcion }}</small>
+      <strong>{{ esAdmin(obj) ? obj.titulo : obj.nombre }}</strong><br />
+      <small *ngIf="!esAdmin(obj)">Asignado: {{ obj.fechaAsignacion | date:'short' }}</small>
+      <small *ngIf="esAdmin(obj)">Tema ID: {{ obj.temaID }}</small>
+
+      <!-- Botón para admins -->
+      <div *ngIf="esAdmin(obj)">
+        <button (click)="abrirModal(obj.objetivoID , obj.temaID)">+ Añadir Hito</button>
+      </div>
     </li>
   </ul>
+
   <button (click)="irAFormulario()" class="btn-nuevo">+ Añadir Objetivo</button>
+
+  <!-- Modal de creación de hito -->
+  <app-hito-form-modal
+    *ngIf="mostrarModal"
+    [objetivoId]="objetivoSeleccionadoId"
+    [temaId]="temaSeleccionadoId"
+    (hitoCreado)="cerrarModal()"
+    (cancelar)="cerrarModal()"
+  ></app-hito-form-modal>
+
 </section>

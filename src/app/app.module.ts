@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { UsuariosModule } from './modules/team/usuarios.module';
+import { HitoFormModalComponent } from './components/hito-form-modal/hito-form-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +19,7 @@ import { UsuariosModule } from './modules/team/usuarios.module';
     HttpClientModule,
     FormsModule,
     MatIconModule,
-    UsuariosModule
+    ReactiveFormsModule,
   ],
   bootstrap: [AppComponent],
   providers: [provideAnimationsAsync()]

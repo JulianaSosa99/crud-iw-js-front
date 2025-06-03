@@ -13,7 +13,7 @@ export interface Usuario {
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioService {
-    private apiUrl = 'https://login-api-iw-js20250420140331-fzdeb6fchcb2hmfv.canadacentral-01.azurewebsites.net/api/usuario';
+    private apiUrl = 'https://servicio-web-academico.onrender.com/api/usuario';
 
     constructor(private http: HttpClient, private authService: AuthService) { }
 

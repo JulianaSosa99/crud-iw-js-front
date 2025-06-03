@@ -1,0 +1,38 @@
+<div class="modal">
+  <form [formGroup]="hitoForm" (ngSubmit)="guardarHito()">
+    <h2>Crear Hito</h2>
+
+    <!-- Descripción -->
+    <label for="descripcion">Descripción del Hito</label>
+    <input id="descripcion" formControlName="descripcion" type="text" />
+
+    <!-- Calificación -->
+    <label for="calificacion">Calificación máxima</label>
+    <input id="calificacion" formControlName="calificacion" type="number" min="1" max="5" />
+
+    <!-- Lista de subtemas -->
+    <div formArrayName="subtemas">
+      <div *ngFor="let subtema of subtemas.controls; let i = index" [formGroupName]="i" class="subtema-box">
+        <h4>Recomendación {{ i + 1 }}</h4>
+
+        <label for="nombre-{{ i }}">Título de la recomendación</label>
+        <input id="nombre-{{ i }}" formControlName="nombre" type="text" />
+
+        <label for="descripcion-{{ i }}">Descripción</label>
+        <input id="descripcion-{{ i }}" formControlName="descripcion" type="text" />
+
+        <label for="recursoUrl-{{ i }}">URL del recurso</label>
+        <input id="recursoUrl-{{ i }}" formControlName="recursoUrl" type="url" />
+
+        <button type="button" (click)="eliminarSubtema(i)">Eliminar Recomendación</button>
+      </div>
+    </div>
+    <div class="acciones">
+      <button type="button" (click)="agregarSubtema()">+ Agregar Recomendación</button>
+      <button type="submit" [disabled]="hitoForm.invalid">Guardar</button>
+      <button type="button" (click)="cancelar.emit()">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+

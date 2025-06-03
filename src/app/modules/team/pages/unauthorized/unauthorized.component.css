@@ -1,0 +1,18 @@
+.unauthorized {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.unauthorized h2 {
+  color: red;
+}
+
+.btn-volver {
+  display: inline-block;
+  margin-top: 20px;
+  background: #5c46ee;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+}

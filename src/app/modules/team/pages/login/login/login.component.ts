@@ -19,12 +19,16 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      if (params['sessionExpired']) {
-        this.mensajeExpiracion = '⚠️ Tu sesión ha expirado. Por favor inicia sesión nuevamente.';
-      }
-    });
+ ngOnInit(): void {
+  if (this.authService.isLoggedIn()) {
+    const rol = this.authService.getUserRole();
+    if (rol === 'Admin') {
+      this.router.navigate(['/admin']);
+    } else if (rol === 'Usuario') {
+      this.router.navigate(['/usuario']);
+    }
+  }
+
   }
   login(): void {
   this.authService.login(this.email, this.password).subscribe({
@@ -36,7 +40,7 @@ export class LoginComponent implements OnInit {
       if (rol === 'Admin') {
         this.router.navigate(['/usuarios']); // o el dashboard del admin
       } else if (rol === 'Usuario') {
-        this.router.navigate(['/usuarios/objetivos']); // 👈 esta es la ruta del usuario
+        this.router.navigate(['/usuarios/objetivos']); 
       } else {
         this.errorMessage = 'Rol desconocido';
       }

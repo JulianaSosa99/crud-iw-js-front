@@ -1,0 +1,29 @@
+.dashboard-container {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.dashboard-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.dashboard-links {
+  list-style: none;
+  padding: 0;
+}
+
+.dashboard-links li {
+  margin: 10px 0;
+}
+
+.dashboard-links a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #5c46ee;
+}

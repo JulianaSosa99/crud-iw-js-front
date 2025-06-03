@@ -1,0 +1,18 @@
+<section class="asignar-tema">
+  <h2>Asignar Tema a Estudiante</h2>
+  <label for="usuarioSelect">Usuario:</label>
+  <select id="usuarioSelect" [(ngModel)]="usuarioSeleccionado" name="usuarioSeleccionado">
+    <option [ngValue]="null" disabled selected>Seleccione un usuario</option>
+    <option *ngFor="let usuario of usuarios" [ngValue]="usuario.id">{{ usuario.nombre }}</option>
+  </select>
+
+  <label for="temaSelect">Tema:</label>
+  <select id="temaSelect" [(ngModel)]="temaSeleccionado" name="temaSeleccionado">
+    <option [ngValue]="null" disabled selected>Seleccione un tema</option>
+    <option *ngFor="let tema of temas" [ngValue]="tema.id">{{ tema.nombre }}</option>
+  </select>
+
+  <button type="button" (click)="asignarTemaAUsuario()" [disabled]="!usuarioSeleccionado || !temaSeleccionado">
+    Asignar tema
+  </button>
+</section>

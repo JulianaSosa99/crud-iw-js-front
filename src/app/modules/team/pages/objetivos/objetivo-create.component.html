@@ -1,33 +1,82 @@
- <section class="form-container">
+<section class="form-objetivo">
   <h2>Añadir Objetivo</h2>
-  <form (ngSubmit)="guardar()">
-    <label for="titulo">Nombre Objetivo</label>
-    <input id="titulo" type="text" [(ngModel)]="titulo" name="titulo" placeholder="Nombre Objetivo" required />
 
-    <label for="tema">Tema</label>
-    <select id="tema" [(ngModel)]="temaID" name="tema" required>
-      <option [value]="null" disabled selected>Tema</option>
-      <option *ngFor="let tema of temas" [value]="tema.temaID">
-        {{ tema.nombre }}
-      </option>
+  <form [formGroup]="objetivoForm" (ngSubmit)="guardarObjetivo()">
+    <label for="nombreObjetivo">Nombre Objetivo</label>
+    <input formControlName="nombreObjetivo" id="nombreObjetivo" type="text" placeholder="Nombre del objetivo" />
+
+    <label for="temaId">Tema</label>
+    <select formControlName="temaId" id="temaId">
+      <option [value]="null" disabled selected>Seleccione un tema</option>
+      <option *ngFor="let tema of temas" [value]="tema.id">{{ tema.nombre }}</option>
     </select>
 
     <label for="descripcion">Descripción</label>
-    <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" placeholder="Añade la descripción"></textarea>
+    <textarea formControlName="descripcion" id="descripcion" placeholder="Describe el objetivo"></textarea>
 
-    <label>Tareas</label>
-    <ul class="hito-list">
-      <li *ngFor="let hito of hitos">
-        <input type="checkbox" checked disabled />
-        {{ hito }}
-      </li>
-    </ul>
+    <button type="submit" [disabled]="objetivoForm.invalid || objetivoId">Crear objetivo</button>
+  </form>
 
-    <div class="hito-input">
-      <input type="text" [(ngModel)]="nuevoHito" name="nuevoHito" placeholder="Nueva tarea" />
-      <button type="button" (click)="agregarHito()">Agregar +</button>
+  <!-- Solo mostrar el botón y el modal de hito si ya existe el objetivo -->
+  <div *ngIf="objetivoId">
+    <button type="button" (click)="abrirModalHito()">+ Agregar Hito</button>
+
+    <!-- NUEVO: Selector de usuario y botón para asignar objetivo -->
+    <div style="margin: 1em 0;">
+      <label for="usuarioSelect">Asignar a usuario:</label>
+      <select id="usuarioSelect" [(ngModel)]="usuarioSeleccionado" name="usuarioSeleccionado">
+        <option [ngValue]="null" disabled selected>Seleccione un usuario</option>
+        <option *ngFor="let usuario of usuarios" [ngValue]="usuario.id">{{ usuario.nombre }}</option>
+      </select>
+      <button type="button" (click)="asignarObjetivoAUsuario()" [disabled]="!usuarioSeleccionado">Asignar objetivo</button>
     </div>
 
-    <button type="submit" class="btn-guardar">Guardar</button>
-  </form>
+    <div *ngIf="hitos.length > 0">
+      <h3>Hitos agregados:</h3>
+      <ul>
+        <li *ngFor="let hito of hitos; let i = index">
+          <strong>{{ hito.descripcion }}</strong> (Calificación: {{ hito.calificacion }})
+          <ul>
+            <li *ngFor="let subtema of hito.subtemas">
+              Subtema: {{ subtema.nombre }} - {{ subtema.descripcion }}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Modal de hito como popup -->
+    <div *ngIf="mostrarModalHito" class="popup-overlay">
+      <div class="popup-content">
+        <app-hito-form-modal
+          [objetivoId]="objetivoId"
+          [temaId]="objetivoForm.value.temaId"
+          [objetivoNombre]="objetivoForm.value.nombreObjetivo"
+          (hitoCreado)="agregarHito($event)"
+          (cancelar)="cerrarModalHito()">
+        </app-hito-form-modal>
+      </div>
+    </div>
+  </div>
+
+  <section style="margin-top:2em;">
+    <h2>Asignar objetivo existente a usuario</h2>
+    <label for="usuarioSelect2">Usuario:</label>
+    <select id="usuarioSelect2" [(ngModel)]="usuarioSeleccionado" name="usuarioSeleccionado2">
+      <option [ngValue]="null" disabled selected>Seleccione un usuario</option>
+      <option *ngFor="let usuario of usuarios" [ngValue]="usuario.id">{{ usuario.nombre }}</option>
+    </select>
+
+    <label for="objetivoSelect">Objetivo:</label>
+    <select id="objetivoSelect" [(ngModel)]="objetivoSeleccionado" name="objetivoSeleccionado">
+      <option [ngValue]="null" disabled selected>Seleccione un objetivo</option>
+      <option *ngFor="let objetivo of objetivos" [ngValue]="objetivo.temas[0]?.id">
+        {{ objetivo.nombre }}
+      </option>
+    </select>
+
+    <button type="button" (click)="asignarObjetivoAUsuario()" [disabled]="!usuarioSeleccionado || !objetivoSeleccionado">
+      Asignar objetivo
+    </button>
+  </section>
 </section>

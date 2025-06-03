@@ -1,22 +1,22 @@
-
-<header *ngIf="mostrarNavbar" class="custom-navbar">
+<nav class="custom-navbar" *ngIf="mostrarNavbar">
   <div class="nav-brand">
-    <a routerLink="usuarios">User Managment</a>
+    <a routerLink="/">CourseTracker</a>
   </div>
-  <div class="nav-actions">
-    <a routerLink="/usuarios/crear" class="nav-button">+ Crear Usuario</a>
-    <button class="nav-button logout-button" (click)="logout()">
-      <span class="material-icons logout-icon">logout</span>
-      <span class="logout-text">Cerrar Sesión</span>
-    </button>
-    
-  <button *ngIf="isAdmin()" [routerLink]="['/usuarios/temas/crear']" class="btn-tema">
-    + Añadir Tema
-  </button>
-    
-  </div>
-</header>
 
-<main class="main-container">
-  <router-outlet></router-outlet>
-</main>
+  <div class="nav-actions">
+    <a class="nav-button" routerLink="/usuarios">Usuarios</a>
+    <a class="nav-button" routerLink="/usuarios/temas/crear" *ngIf="isAdmin()">Crear Tema</a>
+    <a class="nav-button" routerLink="/usuarios/objetivos" *ngIf="isAdmin()">Ver Objetivos</a>
+    <a class="nav-button" routerLink="/usuarios/objetivos/crear" *ngIf="isAdmin()">Nuevo Objetivo</a>
+    <a class="nav-button" routerLink="/usuarios/temas/asignar" *ngIf="isAdmin()">Asignar Tema</a>
+    <a class="nav-button" routerLink="/usuarios/mis-objetivos" *ngIf="!isAdmin()">Mis Objetivos</a>
+
+    <button class="logout-button" (click)="logout()">
+      <span class="logout-icon material-icons">logout</span>
+      <span class="logout-text">Salir</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Aquí se renderizan los componentes hijos según la ruta -->
+<router-outlet></router-outlet>

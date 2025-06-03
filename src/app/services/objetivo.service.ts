@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 export interface ObjetivoResponse {
@@ -9,6 +9,12 @@ export interface ObjetivoResponse {
   descripcion: string;
   temaID: number;
   nivelEvaluacion: number | null;
+}
+
+export interface ObjetivoAsignadoResponse {
+  id: number;
+  nombre: string;
+  fechaAsignacion: string;
 }
 
 export interface ObjetivoCreate {
@@ -21,8 +27,9 @@ export interface ObjetivoCreate {
   providedIn: 'root'
 })
 export class ObjetivoService {
-  private apiUrl = 'https://login-api-iw-js20250420140331-fzdeb6fchcb2hmfv.canadacentral-01.azurewebsites.net/api/objetivo';
-  private hitoUrl = 'https://login-api-iw-js20250420140331-fzdeb6fchcb2hmfv.canadacentral-01.azurewebsites.net/api/hito';
+  private apiBase = 'https://servicio-web-academico.onrender.com/api';
+  private objetivoUrl = `${this.apiBase}/Objetivo`;
+  private hitoUrl = `${this.apiBase}/hito`;
 
   constructor(private http: HttpClient) {}
 
@@ -34,20 +41,26 @@ export class ObjetivoService {
     });
   }
 
-  /** Lista los objetivos del usuario autenticado */
-  obtenerMisObjetivos(): Observable<ObjetivoResponse[]> {
-    return this.http.get<ObjetivoResponse[]>(this.apiUrl, { headers: this.headers() });
+  /** ✅ Lógica correcta para distinguir rol */
+  obtenerObjetivosPorRol(): Observable<(ObjetivoResponse | ObjetivoAsignadoResponse)[]> {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) return of([]);
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const rol = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+    const url = rol === 'Admin'
+      ? `${this.apiBase}/Objetivo/por-usuario`
+      : `${this.apiBase}/usuario/objetivos`;
+
+    return this.http.get<any[]>(url, { headers: this.headers() });
   }
 
-  /** Crea un objetivo y luego sus hitos */
   crearObjetivoConHitos(obj: ObjetivoCreate, hitos: string[]): Observable<void> {
-    // 1) POST objetivo
-    return this.http.post<{ mensaje: string }>(this.apiUrl, obj, { headers: this.headers() }).pipe(
-      // 2) Obtener el nuevo ID. Como tu API no devuelve el ID, recargamos la lista y buscamos el último
-      switchMap(() => this.obtenerMisObjetivos()),
-      map(list => list[0].objetivoID), // asumimos que el nuevo objetivo queda al inicio
+    return this.http.post<{ mensaje: string }>(this.objetivoUrl, obj, { headers: this.headers() }).pipe(
+      switchMap(() => this.obtenerObjetivosPorRol()),
+      map(list => (list[0] as any).objetivoID || (list[0] as any).id),
       switchMap(newId => {
-        // 3) Crear cada hito en paralelo
         const calls = hitos.map(nombre =>
           this.http.post<{ mensaje: string }>(
             this.hitoUrl,
@@ -57,13 +70,11 @@ export class ObjetivoService {
         );
         return forkJoin(calls);
       }),
-      // 4) Como no necesitamos el resultado, retornamos void
       map(() => void 0)
     );
   }
 
-  /** Elimina un objetivo por su ID */
   eliminarObjetivo(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.headers() });
+    return this.http.delete<void>(`${this.objetivoUrl}/${id}`, { headers: this.headers() });
   }
 }

@@ -1,0 +1,32 @@
+<section class="usuario-objetivos">
+  <h2>Mis Objetivos por Tema</h2>
+  <div *ngFor="let objetivo of objetivos">
+    <div class="objetivo">
+      <h3>{{ objetivo.nombreObjetivo }} <span class="tema">({{ objetivo.temaNombre }})</span></h3>
+      <ul>
+        <li *ngFor="let hito of objetivo.hitos">
+          <div class="hito">
+            <span>{{ hito.descripcion }}</span>
+            <span class="estrellas">
+              <ng-container *ngFor="let star of [].constructor(hito.calificacion); let i = index">
+                <span
+                  class="star"
+                  [class.filled]="(getProgreso(hito.id) ?? 0) > i"
+                  (click)="calificarHito(objetivo.id, hito.id, i+1, 'Estrella')"
+                  >&#9733;</span>
+              </ng-container>
+              <span *ngIf="getProgreso(hito.id)">({{ getProgreso(hito.id) }} / {{ hito.calificacion }})</span>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="recomendaciones" *ngIf="recomendaciones.length">
+    <h3>Recomendaciones</h3>
+    <ul>
+      <li *ngFor="let rec of recomendaciones">{{ rec }}</li>
+    </ul>
+  </div>
+</section>

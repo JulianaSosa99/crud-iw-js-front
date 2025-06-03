@@ -29,7 +29,7 @@ export class TemaCreateComponent {
   error: (err) => {
     if (err.status === 200 || err.status === 201) {
       // La API lo trató como error, pero realmente lo insertó
-      this.mensaje = '✅ Tema creado correctamente (respuesta inesperada)';
+      this.mensaje = '✅ Tema creado correctamente';
       this.nombre = '';
       this.descripcion = '';
     } else {

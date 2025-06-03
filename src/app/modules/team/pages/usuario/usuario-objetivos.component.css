@@ -1,0 +1,39 @@
+.usuario-objetivos {
+  max-width: 700px;
+  margin: 2em auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 2em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.objetivo {
+  margin-bottom: 2em;
+}
+.tema {
+  color: #888;
+  font-size: 0.95em;
+}
+.hito {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+.estrellas {
+  margin-left: 1em;
+  cursor: pointer;
+}
+.star {
+  font-size: 1.5em;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.star.filled {
+  color: #ffd700;
+}
+.recomendaciones {
+  margin-top: 2em;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 1em;
+}
