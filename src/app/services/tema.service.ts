@@ -28,4 +28,12 @@ export class TemaService {
     );
     return this.http.post(this.apiUrl, dto, { headers });
   }
+
+  obtenerReporteHitos() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('jwtToken')}`
+    );
+    return this.http.get('https://servicio-web-academico.onrender.com/api/Hito/reporte', { headers });
+  }
 }
