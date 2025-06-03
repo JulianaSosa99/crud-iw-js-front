@@ -51,12 +51,13 @@ Instalar dependencias: npm install
 
 Levantar el servidor Angular: ng serve
 
+Backend Deployado: https://servicio-web-academico.onrender.com
+
 Abrir en el navegador: http://localhost:4200
 
 Abrir Backend: https://github.com/JulianaSosa99/crud-iw-sjk.git
 
-🔐 Autenticación
-Al iniciar sesión con admin@gmail.com (credenciales válidas del backend), se almacena un JWT en localStorage.
+🔐 Autenticaciónd
 
 Las peticiones al backend incluyen el token en los headers para autenticación.
 
